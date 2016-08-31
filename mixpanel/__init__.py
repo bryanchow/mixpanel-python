@@ -435,14 +435,14 @@ class BufferedConsumer(object):
         if len(buf) >= self._max_size:
             self._flush_endpoint(endpoint, api_key)
 
-    def flush(self):
+    def flush(self, api_key=None):
         """Immediately send all buffered messages to Mixpanel.
 
         :raises MixpanelException: if the server is unreachable or any buffered
             message cannot be processed
         """
         for endpoint in self._buffers.keys():
-            self._flush_endpoint(endpoint)
+            self._flush_endpoint(endpoint, api_key=api_key)
 
     def _flush_endpoint(self, endpoint, api_key=None):
         buf = self._buffers[endpoint]
